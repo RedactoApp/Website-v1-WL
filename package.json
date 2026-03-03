@@ -1,0 +1,12 @@
+{
+  "name": "redacto-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "mongodb": "^6.5.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
