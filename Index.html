@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Redacto — Share your screen. Not your secrets.</title>
+    <meta name="description" content="Redacto is a macOS app that hides sensitive windows during calls, demos, and recordings with smooth overlays you can peek through anytime." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="site-header">
+        <div class="logo">
+          <div class="logo__mark" aria-hidden="true"></div>
+          <span class="logo__text">Redacto</span>
+        </div>
+        <nav class="nav">
+          <a href="#features">Features</a>
+          <a href="#who">Who it's for</a>
+          <a href="#faq">FAQ</a>
+          <button class="btn btn--ghost" type="button" onclick="document.getElementById('email').focus()">Join waitlist</button>
+        </nav>
+      </header>
+
+      <main>
+        <!-- HERO -->
+        <section class="hero">
+          <div class="eyebrow-badge">
+            <span class="status-dot"></span>
+            Currently in private beta
+          </div>
+          <h1 class="hero__title">
+            <span class="hero__static">Share your screen. Not your</span>
+            <span class="rotator" data-rotator data-words="personal DMs.|banking tab.|salary.|customer data." aria-live="polite">
+              <span class="rotator__list"></span>
+            </span>
+          </h1>
+          <p class="hero__subtitle">
+            Redacto is a macOS menu bar app that instantly hides sensitive windows during calls, demos, and recordings — with peek-through overlays so you stay in control.
+          </p>
+
+          <form class="waitlist" id="waitlist-form" aria-label="Join the waitlist">
+            <label class="sr-only" for="email">Email address</label>
+            <input id="email" type="email" placeholder="your@email.com" required autocomplete="email" />
+            <button class="btn btn--primary" type="submit">
+              <span class="btn-text">Join waitlist</span>
+              <span class="btn-loading" hidden>
+                <span class="spinner"></span>
+              </span>
+            </button>
+          </form>
+
+          <div id="form-success" class="form-success" hidden>
+            <span class="success-icon">✓</span>
+            You're on the list! Check your email for a confirmation.
+          </div>
+          <div id="form-error" class="form-error" hidden></div>
+
+          <div class="pill">
+            <span class="pill__icon" aria-hidden="true"></span>
+            <span>Early joiners get <strong>lifetime access</strong> with a <strong>one-time purchase</strong>.</span>
+          </div>
+
+          <!-- macOS Preview mockup -->
+          <div class="preview" aria-hidden="true">
+            <div class="preview__menubar">
+              <div class="menubar__left">
+                <span class="dot dot--red"></span>
+                <span class="dot dot--yellow"></span>
+                <span class="dot dot--green"></span>
+                <span class="menubar__app">Redacto</span>
+                <span>File</span>
+                <span>Edit</span>
+                <span>View</span>
+              </div>
+              <div class="menubar__right">
+                <span class="menubar__icon">⬛</span>
+                <span>Mon Mar 3</span>
+                <span>9:41 AM</span>
+              </div>
+            </div>
+
+            <div class="preview__content">
+              <div class="preview__sidebar">
+                <div class="sidebar__item sidebar__item--active">
+                  <span class="sidebar__dot"></span> Redacted windows
+                </div>
+                <div class="sidebar__item">Slack <span class="sidebar__badge">redacted</span></div>
+                <div class="sidebar__item">Terminal <span class="sidebar__badge">redacted</span></div>
+                <div class="sidebar__item">Notion</div>
+                <div class="sidebar__item">Safari</div>
+                <div class="sidebar__item">Figma</div>
+              </div>
+
+              <div class="preview__main">
+                <div class="preview__badge">
+                  <span class="rec-dot"></span> You are sharing your screen
+                </div>
+
+                <div class="preview__windows">
+                  <!-- Normal window -->
+                  <div class="mock-window">
+                    <div class="mock-window__bar">
+                      <span class="dot dot--sm"></span>
+                      <span class="mock-window__title">Figma — Design Review</span>
+                    </div>
+                    <div class="mock-window__body mock-window__body--figma">
+                      <div class="figma-frame"></div>
+                      <div class="figma-panel"></div>
+                    </div>
+                  </div>
+
+                  <!-- Redacted window -->
+                  <div class="mock-window mock-window--redacted">
+                    <div class="mock-window__bar">
+                      <span class="dot dot--sm dot--red"></span>
+                      <span class="mock-window__title">Slack — #salaries-internal</span>
+                      <span class="redacted-tag">REDACTED</span>
+                    </div>
+                    <div class="mock-window__overlay">
+                      <div class="overlay__icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                          <rect x="3" y="11" width="18" height="11" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                          <path d="M7 11V7a5 5 0 0 1 10 0v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                      </div>
+                      <span>Redacted by Redacto</span>
+                      <button class="peek-btn">Hold to peek</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- FEATURES -->
+        <section class="features" id="features">
+          <div class="section-label">Features</div>
+          <h2 class="section-title">Everything you need. Nothing you don't.</h2>
+
+          <div class="features-grid">
+            <div class="feat-card feat-card--hero">
+              <div class="feat-card__tag">Core</div>
+              <h3>One-click window redaction</h3>
+              <p>Select any running app from the menu bar and it disappears from your screen share instantly. No setup, no rules, no fuss.</p>
+              <div class="feat-card__visual feat-card__visual--toggle">
+                <div class="toggle-demo">
+                  <div class="toggle-app">
+                    <span class="toggle-app__dot"></span>
+                    <span>Slack</span>
+                  </div>
+                  <div class="toggle-switch toggle-switch--on"></div>
+                </div>
+                <div class="toggle-demo">
+                  <div class="toggle-app">
+                    <span class="toggle-app__dot toggle-app__dot--gray"></span>
+                    <span>Safari</span>
+                  </div>
+                  <div class="toggle-switch"></div>
+                </div>
+                <div class="toggle-demo">
+                  <div class="toggle-app">
+                    <span class="toggle-app__dot toggle-app__dot--green"></span>
+                    <span>Figma</span>
+                  </div>
+                  <div class="toggle-switch"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="feat-card">
+              <div class="feat-card__tag">Smart</div>
+              <h3>Auto-activates on screen share</h3>
+              <p>Redacto detects when you start sharing and activates your preset rules automatically. Never forget to hide Slack again.</p>
+            </div>
+
+            <div class="feat-card">
+              <div class="feat-card__tag">Control</div>
+              <h3>Peek through any overlay</h3>
+              <p>Hold a hotkey to temporarily reveal a redacted window — only visible on your screen, never to your audience.</p>
+            </div>
+
+            <div class="feat-card feat-card--wide">
+              <div class="feat-card__tag">Precise</div>
+              <h3>Redact specific tabs or URLs, not the whole browser</h3>
+              <p>Browsing to your banking dashboard shouldn't mean hiding the whole Safari window. Redacto can hide individual tabs matching a URL pattern, leaving the rest of your browser visible to your audience.</p>
+            </div>
+
+            <div class="feat-card">
+              <div class="feat-card__tag">Local</div>
+              <h3>100% on-device processing</h3>
+              <p>No cloud, no recording, no telemetry. Everything runs locally on your Mac. Redacto never sees your screen.</p>
+            </div>
+
+            <div class="feat-card">
+              <div class="feat-card__tag">Native</div>
+              <h3>Lives in your menu bar</h3>
+              <p>Lightweight, always available, zero dock clutter. Designed for macOS from the ground up.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- WHO NEEDS IT -->
+        <section class="who" id="who">
+          <div class="section-label">Who it's for</div>
+          <h2 class="section-title">Built for anyone with something to hide</h2>
+          <p class="section-sub">(The good kind.)</p>
+
+          <div class="persona-grid">
+            <div class="persona-card">
+              <div class="persona-card__icon">💻</div>
+              <h3>Developers</h3>
+              <p>Hide your .env files, API keys in Terminal, internal dashboards, and private Notion docs while screensharing a code review or design critique.</p>
+            </div>
+            <div class="persona-card">
+              <div class="persona-card__icon">📊</div>
+              <h3>Sales & Customer Success</h3>
+              <p>Run a polished demo without accidentally revealing competitor pricing, commission structures, or other customer's account details in your CRM.</p>
+            </div>
+            <div class="persona-card">
+              <div class="persona-card__icon">👔</div>
+              <h3>Managers & HR</h3>
+              <p>Share your screen in all-hands or 1:1s without worrying about salary spreadsheets, performance review docs, or headcount plans being visible.</p>
+            </div>
+            <div class="persona-card">
+              <div class="persona-card__icon">🎬</div>
+              <h3>Content Creators</h3>
+              <p>Record tutorials and walkthroughs without pausing to close every personal app. Your audience sees what you want them to see, nothing more.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- PRIVACY -->
+        <section class="privacy-section">
+          <div class="privacy-inner">
+            <div class="privacy-badge">Privacy First</div>
+            <h2>We never see your screen.</h2>
+            <p>Redacto works entirely on your device using macOS Accessibility and Screen Recording APIs. The overlay engine runs locally. No pixels, no metadata, no usage data ever leaves your machine.</p>
+            <div class="privacy-points">
+              <div class="privacy-point">
+                <span class="privacy-point__icon">🔒</span>
+                <div>
+                  <strong>Local-only processing</strong>
+                  <span>No cloud, no backend, no external servers involved in redaction</span>
+                </div>
+              </div>
+              <div class="privacy-point">
+                <span class="privacy-point__icon">🙈</span>
+                <div>
+                  <strong>Zero screen recording</strong>
+                  <span>We never capture, process, or transmit your screen content</span>
+                </div>
+              </div>
+              <div class="privacy-point">
+                <span class="privacy-point__icon">📡</span>
+                <div>
+                  <strong>Minimal telemetry</strong>
+                  <span>Only anonymous crash reports, opt-out anytime — no feature snooping</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="faq" id="faq">
+          <div class="section-label">FAQ</div>
+          <h2 class="section-title">Common questions</h2>
+
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>How does Redacto hide windows without affecting your own view?</summary>
+              <p>Redacto uses macOS's native screen capture APIs to intercept what gets shared with conferencing apps like Zoom, Google Meet, and Teams. It renders a replacement overlay frame where the sensitive window would appear — only in the stream, not on your actual display. You still see everything normally.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Which conferencing apps does it support?</summary>
+              <p>Zoom, Google Meet, Microsoft Teams, Loom, and any app using macOS's standard screen capture APIs. If it works with macOS screen sharing, Redacto works with it.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Does this work for full-screen sharing and window-only sharing?</summary>
+              <p>Yes — both whole-screen sharing and individual window sharing are supported. Tab-level redaction requires full-screen sharing mode.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Will this break any macOS permissions or policies?</summary>
+              <p>No. Redacto uses only official macOS APIs and is fully notarized by Apple. It requests Accessibility and Screen Recording permissions, both of which you control and can revoke anytime.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What's the pricing model?</summary>
+              <p>Redacto will be a one-time purchase — no subscription. Early waitlist members get a discounted lifetime license. Pricing will be announced closer to launch.</p>
+            </details>
+            <details class="faq-item">
+              <summary>When is it launching?</summary>
+              <p>We're in private beta now. Join the waitlist to get early access and be notified when it's ready. Early joiners will be the first to receive a license key.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- BOTTOM CTA -->
+        <section class="cta-bottom">
+          <h2>Get early access</h2>
+          <p>Join the waitlist for a lifetime license at launch pricing.</p>
+          <form class="waitlist waitlist--center" id="waitlist-form-bottom" aria-label="Join the waitlist">
+            <label class="sr-only" for="email-bottom">Email address</label>
+            <input id="email-bottom" type="email" placeholder="your@email.com" required autocomplete="email" />
+            <button class="btn btn--primary" type="submit">
+              <span class="btn-text">Join waitlist</span>
+              <span class="btn-loading" hidden><span class="spinner"></span></span>
+            </button>
+          </form>
+          <div id="form-success-bottom" class="form-success" hidden>
+            <span class="success-icon">✓</span>
+            You're on the list! Check your email for a confirmation.
+          </div>
+        </section>
+
+      </main>
+
+      <footer class="site-footer">
+        <div class="footer-logo">
+          <div class="logo__mark logo__mark--sm" aria-hidden="true"></div>
+          <span>Redacto</span>
+        </div>
+        <div class="footer-links">
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+          <a href="mailto:hello@redacto.app">Contact</a>
+        </div>
+        <p class="footer-copy">© 2025 Redacto. Made for Mac.</p>
+      </footer>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
