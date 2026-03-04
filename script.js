@@ -39,7 +39,8 @@ if (rotator) {
 
       const computeStep = () => {
         const firstItem = list.querySelector(".rotator__item");
-        const gap = parseFloat(getComputedStyle(rotator).getPropertyValue("--rotator-gap")) || 0;
+        const listStyle = getComputedStyle(list);
+        const gap = parseFloat(listStyle.rowGap || listStyle.gap) || 0;
         step = firstItem ? firstItem.getBoundingClientRect().height + gap : 0;
       };
 
@@ -54,7 +55,8 @@ if (rotator) {
       const onResize = () => {
         measureAndSetWidth();
         computeStep();
-        setTransform(index, false);
+        index = 0;
+        setTransform(0, false);
       };
 
       computeStep();

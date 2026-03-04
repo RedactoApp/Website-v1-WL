@@ -162,13 +162,16 @@ body {
   --rotator-gap: 6px;
 }
 
-.rotator__list { display: block; }
+.rotator__list {
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--rotator-gap);
+}
 
 .rotator__item {
   display: block;
   height: 1.2em;
   line-height: 1.2em;
-  margin-bottom: var(--rotator-gap);
   white-space: nowrap;
 }
 
