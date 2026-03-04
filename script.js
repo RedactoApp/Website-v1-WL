@@ -10,7 +10,8 @@ function setupTitleWrap() {
     const style = getComputedStyle(title);
     const gap = parseFloat(style.columnGap || style.gap) || 0;
     const needed = lineOne.getBoundingClientRect().width + gap + lineTwo.getBoundingClientRect().width;
-    const available = title.getBoundingClientRect().width;
+    const container = title.parentElement || title;
+    const available = container.getBoundingClientRect().width;
     if (needed > available) {
       title.classList.add("is-stacked");
     } else {

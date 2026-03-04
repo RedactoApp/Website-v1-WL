@@ -121,6 +121,9 @@ body {
 .hero__title-wrap {
   position: relative;
   margin-top: clamp(36px, 8vh, 96px);
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .hero__title {
@@ -133,6 +136,7 @@ body {
   gap: 10px;
   justify-content: center;
   align-items: baseline;
+  max-width: 100%;
 }
 
 .hero__title.is-stacked {
@@ -144,6 +148,7 @@ body {
   display: inline-flex;
   align-items: baseline;
   gap: 10px;
+  flex: 0 0 auto;
 }
 
 .hero__line--one {
