@@ -154,25 +154,6 @@ body {
   margin-bottom: var(--rotator-gap);
 }
 
-.hero__ghost {
-  position: absolute;
-  color: rgba(255, 255, 255, 0.08);
-  font-size: clamp(40px, 6vw, 60px);
-  pointer-events: none;
-  user-select: none;
-}
-
-.hero__ghost--one {
-  right: -40px;
-  top: 24px;
-}
-
-.hero__ghost--two {
-  right: -120px;
-  top: 46px;
-  color: rgba(255, 255, 255, 0.02);
-}
-
 .hero__subtitle {
   margin-top: 16px;
   color: var(--muted);
@@ -369,7 +350,6 @@ body {
 @media (max-width: 640px) {
   .page { padding: 12px 20px 20px; }
   .nav { gap: 8px; }
-  .hero__ghost { display: none; }
   .waitlist { flex-direction: column; gap: 8px; }
   .waitlist input[type="email"] { border-radius: 6px; border-right: 1px solid var(--border); }
   .btn--primary { width: 100%; border-radius: 6px; height: 44px; }
