@@ -104,6 +104,9 @@ function setupWaitlistForm(formId, successId, errorId) {
       const data = await res.json();
 
       if (res.ok) {
+        submitBtn.disabled = false;
+        btnText?.removeAttribute("hidden");
+        btnLoading?.setAttribute("hidden", "");
         form.setAttribute("hidden", "");
         if (successEl) successEl.removeAttribute("hidden");
       } else {

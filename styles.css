@@ -19,8 +19,9 @@
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-
 html { scroll-behavior: smooth; }
+
+[hidden] { display: none !important; }
 
 body {
   background: var(--bg);
