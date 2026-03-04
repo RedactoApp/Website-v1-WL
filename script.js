@@ -1,5 +1,34 @@
 /* ─── TEXT ROTATOR ─── */
+
+function setupTitleWrap() {
+  const title = document.querySelector(".hero__title");
+  const lineOne = title?.querySelector(".hero__line--one");
+  const lineTwo = title?.querySelector(".hero__line--two");
+  if (!title || !lineOne || !lineTwo) return () => {};
+
+  const compute = () => {
+    const style = getComputedStyle(title);
+    const gap = parseFloat(style.columnGap || style.gap) || 0;
+    const needed = lineOne.getBoundingClientRect().width + gap + lineTwo.getBoundingClientRect().width;
+    const available = title.getBoundingClientRect().width;
+    if (needed > available) {
+      title.classList.add("is-stacked");
+    } else {
+      title.classList.remove("is-stacked");
+    }
+  };
+
+  let resizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(compute, 100);
+  });
+
+  return compute;
+}
+
 const rotator = document.querySelector("[data-rotator]");
+const updateTitleWrap = setupTitleWrap();
 
 if (rotator) {
   const words = rotator.dataset.words
@@ -57,6 +86,7 @@ if (rotator) {
         computeStep();
         index = 0;
         setTransform(0, false);
+        updateTitleWrap();
       };
 
       computeStep();
@@ -83,7 +113,11 @@ if (rotator) {
       setTimeout(tick, pause);
     };
 
-    const init = () => { measureAndSetWidth(); startRotation(); };
+    const init = () => {
+      measureAndSetWidth();
+      startRotation();
+      updateTitleWrap();
+    };
     document.fonts?.ready ? document.fonts.ready.then(init) : window.addEventListener("load", init);
   }
 }

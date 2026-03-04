@@ -135,6 +135,11 @@ body {
   align-items: baseline;
 }
 
+.hero__title.is-stacked {
+  flex-direction: column;
+  gap: 6px;
+}
+
 .hero__line {
   display: inline-flex;
   align-items: baseline;
@@ -365,12 +370,6 @@ body {
   border: 0;
 }
 
-
-@media (max-width: 1100px) {
-  .hero__title {
-    flex-direction: column;
-    gap: 6px;
-  }
 
   .hero__line {
     justify-content: center;
