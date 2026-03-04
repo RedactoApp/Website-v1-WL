@@ -128,11 +128,25 @@ body {
   font-weight: 500;
   letter-spacing: -0.02em;
   line-height: 1.15;
-  display: inline-flex;
+  display: flex;
   flex-wrap: wrap;
   gap: 10px;
   justify-content: center;
   align-items: baseline;
+}
+
+.hero__line {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.hero__line--one {
+  white-space: nowrap;
+}
+
+.hero__line--two {
+  white-space: nowrap;
 }
 
 .rotator {

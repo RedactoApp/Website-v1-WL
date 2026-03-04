@@ -35,9 +35,13 @@ if (rotator) {
       let index = 0;
       const duration = 600;
       const pause = 1800;
-      const firstItem = list.querySelector(".rotator__item");
-      const gap = parseFloat(getComputedStyle(rotator).getPropertyValue("--rotator-gap")) || 0;
-      const step = firstItem ? firstItem.getBoundingClientRect().height + gap : 0;
+      let step = 0;
+
+      const computeStep = () => {
+        const firstItem = list.querySelector(".rotator__item");
+        const gap = parseFloat(getComputedStyle(rotator).getPropertyValue("--rotator-gap")) || 0;
+        step = firstItem ? firstItem.getBoundingClientRect().height + gap : 0;
+      };
 
       const setTransform = (i, animate) => {
         list.style.transition = animate
@@ -47,7 +51,20 @@ if (rotator) {
         if (!animate) void list.offsetHeight;
       };
 
+      const onResize = () => {
+        measureAndSetWidth();
+        computeStep();
+        setTransform(index, false);
+      };
+
+      computeStep();
       setTransform(0, false);
+
+      let resizeTimer;
+      window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(onResize, 100);
+      });
 
       const tick = () => {
         index += 1;
