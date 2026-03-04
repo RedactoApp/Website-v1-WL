@@ -44,6 +44,7 @@
 
           <form class="waitlist" id="waitlist-form" aria-label="Join the waitlist">
             <label class="sr-only" for="email">Email address</label>
+            <input class="honeypot" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" />
             <input id="email" type="email" placeholder="your@email.com" required autocomplete="email" />
             <button class="btn btn--primary" type="submit">
               <span class="btn-text">Join waitlist</span>
@@ -55,7 +56,7 @@
 
           <div id="form-success" class="form-success" hidden>
             <span class="success-icon">✓</span>
-            You're on the list! Check your email for a confirmation.
+            <span class="success-text">You're on the list! Check your email for a confirmation.</span>
           </div>
           <div id="form-error" class="form-error" hidden></div>
 
@@ -313,7 +314,7 @@
           </form>
           <div id="form-success-bottom" class="form-success" hidden>
             <span class="success-icon">✓</span>
-            You're on the list! Check your email for a confirmation.
+            <span class="success-text">You're on the list! Check your email for a confirmation.</span>
           </div>
         </section>
 

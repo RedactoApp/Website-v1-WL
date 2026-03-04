@@ -75,57 +75,66 @@ function setupWaitlistForm(formId, successId, errorId) {
   if (!form) return;
 
   const successEl = document.getElementById(successId);
-  const errorEl = document.getElementById(errorId);
+  const successTextEl = successEl ? successEl.querySelector(".success-text") : null;
+  const errorEl = errorId ? document.getElementById(errorId) : null;
+
+  let isSubmitting = false;
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
+    if (isSubmitting) return;
 
     const emailInput = form.querySelector("input[type='email']");
+    const honeypot = form.querySelector("input[name='company']");
     const btnText = form.querySelector(".btn-text");
     const btnLoading = form.querySelector(".btn-loading");
     const submitBtn = form.querySelector("button[type='submit']");
 
     const email = emailInput.value.trim();
-    if (!email) return;
+    const company = honeypot ? honeypot.value.trim() : "";
+    if (!email || company) return;
 
     // Loading state
+    isSubmitting = true;
     submitBtn.disabled = true;
     btnText?.setAttribute("hidden", "");
     btnLoading?.removeAttribute("hidden");
+    if (successEl) successEl.setAttribute("hidden", "");
     if (errorEl) errorEl.setAttribute("hidden", "");
 
     try {
       const res = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, company }),
       });
 
-      const data = await res.json();
+      const data = await res.json().catch(() => ({}));
 
       if (res.ok) {
-        submitBtn.disabled = false;
-        btnText?.removeAttribute("hidden");
-        btnLoading?.setAttribute("hidden", "");
-        form.setAttribute("hidden", "");
+        if (successTextEl) {
+          successTextEl.textContent = data.message || "You're on the list! Check your email for a confirmation.";
+        }
         if (successEl) successEl.removeAttribute("hidden");
+        if (errorEl) errorEl.setAttribute("hidden", "");
+        emailInput.focus();
+        emailInput.select();
       } else {
         if (errorEl) {
-          errorEl.textContent = data.error || "Something went wrong. Please try again.";
+          errorEl.textContent = data.error || data.message || "Something went wrong. Please try again.";
           errorEl.removeAttribute("hidden");
         }
-        submitBtn.disabled = false;
-        btnText?.removeAttribute("hidden");
-        btnLoading?.setAttribute("hidden", "");
       }
     } catch {
       if (errorEl) {
         errorEl.textContent = "Network error — please try again.";
         errorEl.removeAttribute("hidden");
       }
+    } finally {
       submitBtn.disabled = false;
       btnText?.removeAttribute("hidden");
       btnLoading?.setAttribute("hidden", "");
+      isSubmitting = false;
     }
   });
 }
