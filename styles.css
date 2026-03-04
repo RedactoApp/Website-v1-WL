@@ -365,6 +365,18 @@ body {
   border: 0;
 }
 
+
+@media (max-width: 1100px) {
+  .hero__title {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .hero__line {
+    justify-content: center;
+  }
+}
+
 @media (max-width: 960px) {
   .nav a { display: none; }
 }
