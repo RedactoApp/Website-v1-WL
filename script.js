@@ -195,3 +195,16 @@ function setupWaitlistForm(formId, successId, errorId) {
 
 setupWaitlistForm("waitlist-form", "form-success", "form-error");
 setupWaitlistForm("waitlist-form-bottom", "form-success-bottom", null);
+
+/* ─── DOWNLOAD (NO NAVIGATION) ─── */
+const downloadBtn = document.getElementById("download-btn");
+if (downloadBtn) {
+  downloadBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    const iframe = document.createElement("iframe");
+    iframe.style.display = "none";
+    iframe.src = downloadBtn.getAttribute("href");
+    document.body.appendChild(iframe);
+    setTimeout(() => iframe.remove(), 60000);
+  });
+}
